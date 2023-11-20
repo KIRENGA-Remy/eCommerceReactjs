@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CartProduct from '../component/cartProduct';
-import emptyCartImage from '../assest/empty.gif';
+import emptyCartImage  from "../assest/empty.gif";
 
 const Cart = () => {
   const productCartItems = useSelector((state) => state.product.cartItem);
@@ -12,8 +12,10 @@ const Cart = () => {
   return (
     <div className='flex min-h-screen mt-[-15px] bg-slate-300'>
             <h2 className='text-xl text-slate-40 font-lg md:text-2xl p-3 font-medium md:font-semibold'>Your Cart Items</h2>
-    <div className=''>
-    <div className='w-full'>
+
+            { productCartItems[0] ? 
+    <div className='w-full flex gap-10'>
+    <div className='mt-14 w-1/2'>
 
         {
           productCartItems.map(el => {
@@ -45,6 +47,12 @@ const Cart = () => {
       <button className='bg-red-500 hover:bg-red-600 w-full text-white font-serif  p-1'>Payment</button>
     </div>
     </div>
+    : 
+    <div className='flex w-full justify-center mr-9 items-center flex-col md:items-center md:justify-center'>
+      <img src={emptyCartImage} alt={emptyCartImage} className='w-full max-w-sm' />
+      <p className='text-slate-500 text-2xl font-bold'>Empty Cart</p>
+    </div>
+    }
     </div>
   )
 }

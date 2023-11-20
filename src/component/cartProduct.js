@@ -8,7 +8,7 @@ const CartProduct = ({id, name, image, price, qty, total, category}) => {
   const dispatch = useDispatch();
 
   return (
-    <div className='flex bg-slate-400 shadow-md drop-shadow-sm max-w-xl gap-2 mx-3 border-b  md:p-3'>
+    <div className='flex bg-white shadow-md drop-shadow-sm max-w-xl gap-2 mx-3 border-b  md:p-3'>
       <div className='mx-1 bg-white rounded overflow-hidden'>
         <img src={image} alt={image} className='h-28 w-32' />
       </div>
@@ -24,9 +24,9 @@ const CartProduct = ({id, name, image, price, qty, total, category}) => {
 
       <div className='tems-center flex justify-between'>
         <div className='flex gap-3'>
-             <button className='bg-slate-500 hover:bg-slate-600 text-lg px-2 rounded-sm' onClick={() => dispatch(increaseQty(id))}><TbPlus /></button>
+             <button className='bg-slate-400 hover:bg-slate-500 text-lg px-2 rounded-sm' onClick={() => dispatch(increaseQty(id))}><TbPlus /></button>
              <p className='p-2'>{qty}</p>
-             <button className='bg-slate-500 hover:bg-slate-600 text-lg px-2 rounded-sm' onClick={() => dispatch(descreaseQty(id))}><TbMinus /></button>
+             <button className='bg-slate-400 hover:bg-slate-500 text-lg px-2 rounded-sm' onClick={() => dispatch(descreaseQty(id))}><TbMinus /></button>
         </div>
         <div className='flex items-center gap-1 font-bold text-slate-600'>
           <p>Total : </p>

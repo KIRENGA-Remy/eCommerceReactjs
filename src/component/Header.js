@@ -30,7 +30,7 @@ const navigate = useNavigate();
 
   const cartNumberItems = useSelector((state) => state.product.cartItem);
   return (
-    <header className='fixed shadow-md w-full h-12 md:shadow-md px-3 md:px-4 bg-white'>
+    <header className='fixed shadow-md w-full h-12 md:shadow-md px-3 md:px-4 z-50 bg-white'>
         {/* desktop */}
         <div className='flex items-center justify-between h-full'>
 

@@ -11,13 +11,23 @@ function App() {
   const dispatch = useDispatch()
   const productData = useSelector((state)=>state.product)
  
-  useEffect(()=>{
-    (async()=>{
-      const res = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/product`)
-      const resData = await res.json()
-      dispatch(setDataProduct(resData))
-    })()
-  },[])
+  useEffect(() => {
+    document.title = "Remy E-Commerce App";
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/product`);
+        const resData = await res.json();
+        dispatch(setDataProduct(resData));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // You might want to show a toast notification for the user about the error.
+        toast.error("Failed to fetch product data");
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
   return (
     <>
