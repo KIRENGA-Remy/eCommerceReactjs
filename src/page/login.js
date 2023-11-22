@@ -38,7 +38,7 @@ const dispatch = useDispatch();
     e.preventDefault();
 
   const {email, password} = data;
-  if( email == "" || password == ""){
+  if( email === "" && password === ""){
     alert("All fields are required")
   } else {
 
@@ -55,7 +55,7 @@ const dispatch = useDispatch();
       toast(dataRes.message)
 
       if (!fetchData.ok) {
-        console.error("Failed to register user:", fetchData.statusText);
+        console.error("Failed to login the user user:", fetchData.statusText);
         return;
       }
       if(dataRes.alert){
@@ -72,7 +72,7 @@ const dispatch = useDispatch();
       <h2 className='flex items-center justify-center font-bold mb-2'>Login</h2>
       <form className='flex flex-col' onSubmit={handleSubmit}>
         <div className='w-20 items-center m-auto overflow-hidden rounded-full drop-shadow shadow-md'>
-          <img src={loginSignupImage} alt="image" className='w-full'/>
+          { userData.image ? <img src={userData.image} className='h-full w-full' alt={userData.image} /> : <img src={loginSignupImage} alt="image" className='w-full'/> }
         </div>
 
         <label htmlFor="email">Email</label>
@@ -83,7 +83,7 @@ const dispatch = useDispatch();
         <div className='flex items-center bg-slate-200 rounded-sm'>
         <input type={showPassword ? "text" : "password"} name="password" className='bg-slate-200 w-full mt-1 h-5 justify-center outline-none pb-2 font-bold'
         value={data.password} onChange={handleOnChange}/>
-        <span className='text-xl px-2 cursor-pointer'  onClick={handleShowPassword} >{showPassword ? <BiShow /> : <BiHide />} </span> 
+        <span className='text-xl px-2 cursor-pointer' onClick={handleShowPassword} >{showPassword ? <BiShow /> : <BiHide />} </span> 
         </div>
         
         <button type={'submit'} className='flex text-white bg-red-500 hover:bg-red-600 font-bold rounded-xl mt-5 max-w-[150px] m-auto px-7 py-1'>Login</button>

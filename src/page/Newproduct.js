@@ -41,7 +41,7 @@ const NewProduct = () => {
 const {name, category, image, description} = data;
 
 if(name && category && image && description){
-    const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/products`, {
+    const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/uploadproducts`, {
       method: "POST",
       headers: {
         "content-type": "application/json"

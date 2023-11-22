@@ -16,6 +16,7 @@ const Header = () => {
 const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const userData = useSelector((state) => state.user);
+  console.log(userData);
   const dispatch = useDispatch();
 
   const handleShowMenu = () => {
@@ -24,7 +25,7 @@ const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(logoutRedux());
-    toast("Logout successfully")
+    toast("You logged out successfully")
     navigate("/");
   }
 

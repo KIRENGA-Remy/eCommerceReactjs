@@ -8,7 +8,7 @@ import { setDataProduct } from "./redux/productSlide";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const productData = useSelector((state)=>state.product)
  
   useEffect(() => {
@@ -17,6 +17,7 @@ function App() {
       try {
         const res = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/product`);
         const resData = await res.json();
+        console.log(resData);
         dispatch(setDataProduct(resData));
       } catch (error) {
         console.error("Error fetching data:", error);
