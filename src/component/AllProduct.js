@@ -29,11 +29,15 @@ const handleDataFilter = (category) => {
   return (
     <>
       <div className='text-slate-600 font-medium text-2xl my-5 mx-5'>{heading}</div>
-      <div className='flex justify-center gap-6 overflow-scroll scrollbar-none'>
+      <div className="flex gap-6 justify-center overflow-scroll scrollbar-none">
         {
           filterProductCategoryList[0] ? filterProductCategoryList.map(el => {
             return(
-            <FilterProduct category={el} onClick={() => handleDataFilter(el)} />
+            <FilterProduct 
+            key={el}
+            category={el} 
+            isActive={el.toLowerCase() === filterby.toLowerCase()}
+            onClick={() => handleDataFilter(el)} />
             )
           })
           :
