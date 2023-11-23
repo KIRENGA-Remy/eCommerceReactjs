@@ -29,7 +29,7 @@ const CardFeature = ({name, category, price, image, loading, id}) => {
       <p className='font-bold text-center mb-3'> <span className='text-red-500'>$</span>{price}</p>
       </div>
       </Link>
-      <button className='bg-yellow-500 hover:bg-yellow-600 w-full rounded-sm' onClick={handleAddCart}>Add Cart</button>
+      <button className='bg-yellow-500 hover:bg-yellow-600 w-full mx-12 rounded-sm' onClick={handleAddCart}>Add Cart</button>
         </>
          : 
          <div className='min-h-[170px] flex justify-center items-center'>
