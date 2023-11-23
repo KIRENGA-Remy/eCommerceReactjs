@@ -52,5 +52,5 @@ export const productSlice = createSlice({
     }
     }
 });
-export const { setDataProduct, addCartItem, deleteCartItem, increaseQty, descreaseQty } = productSlice.actions
+export const { setDataProduct, addCartItem, deleteCartItem, increaseQty, decreaseQTY } = productSlice.actions
 export default productSlice.reducer;

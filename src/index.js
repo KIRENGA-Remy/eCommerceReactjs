@@ -11,6 +11,7 @@ import Menu from './page/Menu.js';
 import Login from './page/login';
 import Newproduct from './page/Newproduct';
 import Signup from './page/Signup';
+import Success from './page/Success.js';
 import { store } from './redux/index.js';
 import { Provider} from 'react-redux';
 import Cart from './page/Cart';
@@ -22,12 +23,13 @@ const router = createBrowserRouter(
     <Route  path='/' element={<App />} >
       <Route index element={<Home />} />
       {/* <Route path='menu' element={<Menu />} /> */}
-      <Route path='menu' element={<Menu />} />
+      <Route path="menu/:filterby" element={<Menu />} />
       <Route path='about' element={<About />} />
       <Route path='contact' element={<Contact />} />
       <Route path='newproduct' element={<Newproduct />} />
       <Route path='login' element={<Login />} />
       <Route path='signup' element={<Signup />} />
+      <Route path="success" element={<Success/>}/>
       <Route path='cart' element={<Cart />} />
     </Route>
   )
