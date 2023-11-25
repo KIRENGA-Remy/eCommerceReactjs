@@ -69,7 +69,7 @@ const Home = () => {
     <button onClick={nextProduct} className='bg-slate-400 hover:bg-slate-500 font-bold text-xl'><GrNext /></button>
     </div>
       </div>
-      <div className='flex gap-4 cursor-pointer overflow-scroll scrollbar-none scroll-smooth transition-all' ref={slideProductRef}>
+      <div className='flex gap-4 cursor-pointer overflow-scroll scrollbar-none scroll-smooth transition-all' style={{ scrollbarWidth: 'none', '-ms-overflow-style': 'none' }} ref={slideProductRef}>
       {
         homeProductCartListVegetables[0] ? 
          homeProductCartListVegetables.map(el => { 

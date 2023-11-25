@@ -85,8 +85,7 @@ const CartProduct = ({ id, name, image, category, qty, total, price }) => {
             <p className="font-semibold p-1">{qty}</p>
             <button
               onClick={()=>dispatch(decreaseQTY(id))}
-              className="bg-slate-300 py-1 mt-2 rounded hover:bg-slate-400 p-1 "
-            >
+              className="bg-slate-300 py-1 mt-2 rounded hover:bg-slate-400 p-1">
               <TbMinus />
             </button>
           </div>

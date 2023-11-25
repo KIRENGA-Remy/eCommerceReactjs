@@ -39,7 +39,7 @@ export const productSlice = createSlice({
       const total = price * qtyIncrease;
       state.cartItem[index].total = total
     },
-    descreaseQty : (state,action) => {
+    decreaseQTY : (state,action) => {
       const index = state.cartItem.findIndex((el) => el._id === action.payload)
       let qty = state.cartItem[index].qty
       if(qty > 1){

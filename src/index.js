@@ -14,7 +14,8 @@ import Signup from './page/Signup';
 import Success from './page/Success.js';
 import { store } from './redux/index.js';
 import { Provider} from 'react-redux';
-import Cart from './page/Cart';
+import Cart from './page/Cart.js';
+import Cancel from './page/Cancel.js';
 
 
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path='signup' element={<Signup />} />
       <Route path="success" element={<Success/>}/>
       <Route path='cart' element={<Cart />} />
+      <Route path='cancel' element={<Cancel />} />
     </Route>
   )
 )

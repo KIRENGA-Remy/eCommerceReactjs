@@ -3,7 +3,7 @@ import loginSignupImage from '../assest/login-animation.gif';
 import { BiShow, BiHide} from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 import {toast} from "react-hot-toast";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginRedux } from '../redux/userSlice';
 
 const Login = () => {
@@ -19,8 +19,6 @@ const navigate = useNavigate();
     password: "",
   });
 
-  const userData = useSelector(state => state)
-  console.log(userData);
 const dispatch = useDispatch();
 
 
@@ -51,7 +49,7 @@ const dispatch = useDispatch();
     });
       
       const dataRes = await fetchData.json();
-      console.log(dataRes);
+      // console.log(dataRes);
       toast(dataRes.message)
 
       if (!fetchData.ok) {
@@ -64,7 +62,6 @@ const dispatch = useDispatch();
           navigate("/");
         }, 1000)
       }
-      console.log(userData);
   }
 };
   return (
@@ -72,14 +69,14 @@ const dispatch = useDispatch();
       <h2 className='flex items-center justify-center font-bold mb-2'>Login</h2>
       <form className='flex flex-col' onSubmit={handleSubmit}>
         <div className='w-20 items-center m-auto overflow-hidden rounded-full drop-shadow shadow-md'>
-          { userData.image ? <img src={userData.image} className='h-full w-full' alt={userData.image} /> : <img src={loginSignupImage} alt="image" className='w-full'/> }
+         <img src={loginSignupImage} alt="image" className='w-full'/> 
         </div>
 
         <label htmlFor="email">Email</label>
         <input type={"email"} name='email' className='bg-slate-200 w-full mt-1 font-bold' value={data.email} 
         onChange={handleOnChange}/>
 
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className='mt-3'>Password</label>
         <div className='flex items-center bg-slate-200 rounded-sm'>
         <input type={showPassword ? "text" : "password"} name="password" className='bg-slate-200 w-full mt-1 h-5 justify-center outline-none pb-2 font-bold'
         value={data.password} onChange={handleOnChange}/>

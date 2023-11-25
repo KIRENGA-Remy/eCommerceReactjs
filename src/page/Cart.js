@@ -85,35 +85,21 @@ const Cart = () => {
     0
   );
 
-  
-  
-  const handlePayment = async()=>{
-
-      if(user.email){
-          
-          const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
-          const res = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/create-checkout-session`,{
-            method : "POST",
-            headers  : {
-              "content-type" : "application/json"
-            },
-            body  : JSON.stringify(productCartItem)
-          })
-          if(res.statusCode === 500) return;
-
-          const data = await res.json()
-          console.log(data)
-
-          toast("Redirect to payment Gateway...!")
-          stripePromise.redirectToCheckout({sessionId : data}) 
-      }
-      else{
-        toast("You have not Login!")
-        setTimeout(()=>{
-          navigate("/login")
-        },1000)
-      }
+  const handlePayment = async (req,res) => {
+    const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+    const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/checkout-payment`,{
+      method: "POST",
+      headers: {
+        "content-type" : "application/json"
+      },
+      body: JSON.stringify(productCartItem)
+    })
+    if(res.statusCode === 500) return;
+    const data = await fetchData.json();
+    console.log(data);
     
+    toast("Redirect to payment Gateway...!")
+    stripePromise.redirectToCheckout({sessionId: data});
   }
   return (
     <>

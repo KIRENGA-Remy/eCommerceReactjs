@@ -1,71 +1,67 @@
-import React, { useEffect, useState } from 'react'
-import CardFeature from './CardFeature'
-import FilterProduct from './FilterProduct'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import CardFeature from './CardFeature';
+import FilterProduct from './FilterProduct';
+import { useSelector } from 'react-redux';
 
-const AllProduct = ({heading}) => {
-  const productData = useSelector((state) => state.product.productList)
+const AllProduct = ({ heading }) => {
+  const productData = useSelector((state) => state.product.productList);
 
-  const filterProductCategoryList = [...new Set(productData.map(el => el.category))];
+  const filterProductCategoryList = [...new Set(productData.map((el) => el.category))];
 
-  const loadingArrayFeature = new Array(10).fill(null);
-  
-const [dataFilter, setDataFilter] = useState([]);
+  const [dataFilter, setDataFilter] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-useEffect(() => {
-  setDataFilter(productData);
-}, [productData]);
+  useEffect(() => {
+    setDataFilter(productData);
+  }, [productData]);
 
+  const handleDataFilter = (category) => {
+    setSelectedCategory(category);
+    const filterBy = productData.filter((el) => el.category.toLowerCase() === category.toLowerCase());
+    setDataFilter(filterBy);
+  };
 
-const handleDataFilter = (category) => {
-  const filterBy = productData.filter(el => el.category.toLowerCase() === category.toLowerCase());
-  setDataFilter(() => {
-    return[
-      ...filterBy
-    ]
-  })
-}
+  const isFilterLoading = filterProductCategoryList.length === 0;
+  const isDataLoading = dataFilter.length === 0;
 
   return (
     <>
       <div className='text-slate-600 font-medium text-2xl my-5 mx-5'>{heading}</div>
-      <div className="flex gap-6 justify-center overflow-scroll scrollbar-none">
-        {
-          filterProductCategoryList[0] ? filterProductCategoryList.map(el => {
-            return(
-            <FilterProduct 
-            key={el}
-            category={el} 
-            isActive={el.toLowerCase() === filterby.toLowerCase()}
-            onClick={() => handleDataFilter(el)} />
-            )
-          })
-          :
-          <div className='flex justify-center items-center h-full font-medium'>
-          <p>Loading...</p>
+      {isFilterLoading ? (
+        <div className='flex justify-center items-center h-full font-medium'>
         </div>
-        }
-      </div>
-      <div className='flex flex-wrap justify-center gap-4'>
-      {
-        dataFilter[0] ? dataFilter.map(el => {
-          return(
-            <CardFeature 
-            key={el._id}
-            image={el.image}
-            name={el.name}
-            category={el.category}
-            price={el.price}
-            id={el._id}
+      ) : (
+        <div className="flex gap-6 justify-center overflow-scroll scrollbar-none">
+          {filterProductCategoryList.map((el) => (
+            <FilterProduct
+              key={el}
+              category={el}
+              isActive={el.toLowerCase() === selectedCategory.toLowerCase()}
+              onClick={() => handleDataFilter(el)}
             />
-          )
-        })
-        : 
-          loadingArrayFeature.map(el => <CardFeature loading={"Loading..."}/> )
-      }
-      </div>
-      </>
-  )
-}
+          ))}
+        </div>
+      )}
+      {isDataLoading ? (
+        <div className='flex justify-center items-center h-full font-medium'>
+          <p>Loading products...</p>
+        </div>
+      ) : (
+        <div className='flex flex-wrap justify-center gap-4'>
+          {dataFilter.map((el) => (
+            <CardFeature
+              key={el._id}
+              image={el.image}
+              name={el.name}
+              category={el.category}
+              price={el.price}
+              id={el._id}
+            />
+          ))}
+        </div>
+      )}
+    </>
+  );
+};
 
-export default AllProduct
+export default AllProduct;
