@@ -25,7 +25,6 @@ const NewProduct = () => {
 
   const uploadImage = async (e) => {
     const data = await ImagetoBase64(e.target.files[0]);
-    // console.log(data);
 
     setData((preve) => {
       return{
@@ -37,7 +36,6 @@ const NewProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
 const {name, category, image, description} = data;
 
 if(name && category && image && description){
@@ -49,7 +47,6 @@ if(name && category && image && description){
       body: JSON.stringify(data)
     })
     const dataRes = await fetchData.json();
-    console.log(dataRes);
     toast(dataRes.message);
 
   } else {

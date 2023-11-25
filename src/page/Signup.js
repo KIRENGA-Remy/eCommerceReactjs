@@ -34,7 +34,6 @@ const navigate = useNavigate();
     }))
   }
 
-  console.log(process.env.REACT_APP_SERVER_DOMIN);
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -58,7 +57,6 @@ const navigate = useNavigate();
       }
       
       const dataRes = await fetchData.json();
-      console.log(dataRes);
       toast(dataRes.message);
       if(dataRes.alert){
         navigate("/login");
@@ -90,7 +88,7 @@ const handleUploadProfileImage =  async(e) => {
           <img src={data.image ? data.image : loginSignupImage} alt="image" className='w-full'/>
           <label htmlFor="profileImage">
           <div className='pb-1 h-full opacity-60'>
-            <p className='absolute text-white bg-slate-500 text-center bottom-0 cursor-pointer h-1/3  w-full'>Upload</p>
+            <p className='absolute text-white bg-slate-500 text-center bottom-0 cursor-pointer h-1/3 w-full'>Upload</p>
             <input type={"file"} name='profileImage' accept='image/*' id='profileImage'
             onChange={handleUploadProfileImage} className='hidden'/>
           </div>

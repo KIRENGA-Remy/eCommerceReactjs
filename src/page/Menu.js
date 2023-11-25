@@ -1,22 +1,27 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AllProduct from '../component/AllProduct';
 import { addCartItem } from '../redux/productSlide';
 
 const Menu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {filterby} = useParams();
   const productData = useSelector((state) => state.product.productList);
-  console.log(productData);
+
   const productDisplay = productData.filter((el) => el._id === filterby)[0];
-  console.log(productDisplay);
 
   const productCartItems = useSelector((state) => state.product.cartItem);
   console.log(productCartItems);
   
   const handleAddCartItem = () => {
     dispatch(addCartItem(productDisplay))
+  }
+
+  const handleBuy = () => {
+    dispatch(addCartItem(productDisplay))
+    navigate("/cart");
   }
   return (
     <>
@@ -29,7 +34,7 @@ const Menu = () => {
       <p className='text-slate-400 font-bold capitalize'>{productDisplay.category}</p>
       <p className='font-bold'><span className='text-red-500'>$</span>{productDisplay.price}</p>
       <div className='flex gap-3'>
-      <button className='bg-yellow-500 hover:bg-yellow-600 text-lg px-2 rounded-sm'>Buy</button>
+      <button onClick={handleBuy} className='bg-yellow-500 hover:bg-yellow-600 text-lg px-2 rounded-sm'>Buy</button>
       <button onClick={handleAddCartItem} className='bg-yellow-500 hover:bg-yellow-600 text-lg px-2 rounded-sm'>Add Cart</button>
       </div>
       <p className='text-slate-400 font-semibold pt-2'>Description</p>

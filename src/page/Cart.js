@@ -71,6 +71,8 @@ import { toast } from "react-hot-toast";
 import {loadStripe} from '@stripe/stripe-js';
 import { useNavigate } from "react-router-dom";
 
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
   const user = useSelector(state => state.user)
@@ -86,20 +88,30 @@ const Cart = () => {
   );
 
   const handlePayment = async (req,res) => {
-    const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-    const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/checkout-payment`,{
-      method: "POST",
-      headers: {
-        "content-type" : "application/json"
-      },
-      body: JSON.stringify(productCartItem)
-    })
-    if(res.statusCode === 500) return;
-    const data = await fetchData.json();
-    console.log(data);
-    
-    toast("Redirect to payment Gateway...!")
-    stripePromise.redirectToCheckout({sessionId: data});
+
+    if(user.email){
+      const stripe = await stripePromise;
+      const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/checkout-payment`,{
+        method: "POST",
+        headers: {
+          "content-type" : "application/json"
+        },
+        body: JSON.stringify(productCartItem)
+      })
+      if(res.statusCode === 500) return;
+      const session = await fetchData.json();
+      console.log(data);
+      
+      toast("Redirect to payment Gateway...!")
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+    } else {
+      setTimeout(() => {
+        toast("You didn't logged in!")
+        navigate("/login")
+      }, 2000)
+    }
   }
   return (
     <>
