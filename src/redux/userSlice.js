@@ -14,7 +14,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     loginRedux: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
 
       // Set individual properties directly
       

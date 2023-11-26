@@ -13,7 +13,6 @@ const Menu = () => {
   const productDisplay = productData.filter((el) => el._id === filterby)[0];
 
   const productCartItems = useSelector((state) => state.product.cartItem);
-  console.log(productCartItems);
   
   const handleAddCartItem = () => {
     dispatch(addCartItem(productDisplay))
