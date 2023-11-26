@@ -10,6 +10,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
+  console.log(productCartItem);
   const user = useSelector(state => state.user)
   console.log(user);
   const navigate = useNavigate()
@@ -29,11 +30,11 @@ const Cart = () => {
 
         // Create an array called 'items' containing the necessary data from 'productCartItem'
         const items = productCartItem.map((item) => ({
+            id: item._id,
             name: item.name,
             price: item.price,
             quantity: item.qty,
         }));
-
         const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/checkout-payment`, {
             method: "POST",
             headers: {
