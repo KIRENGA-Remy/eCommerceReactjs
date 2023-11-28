@@ -59,6 +59,8 @@ const Cart = () => {
         console.error('Error during payment:', error);
       }
     }
+    toast("You're required to login first");
+    navigate('/login')
   };
 
   return (
