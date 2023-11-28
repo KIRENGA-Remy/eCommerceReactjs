@@ -43,7 +43,7 @@ const navigate = useNavigate();
    <div className='flex items-center justify-center gap-4 md:gap-7 cursor-pointer'>
     <nav className='text-base gap-4 md:gap-6 md:text-lg hidden md:flex'>
       <Link to={""}>Home</Link>
-      <Link to={"/:filterby"}>Menu</Link>
+      <Link to={"menu"}>Menu</Link>
       <Link to={"about"}>About</Link>
       <Link to={"contact"}>Contact</Link>
     </nav>
@@ -64,7 +64,7 @@ const navigate = useNavigate();
     { userData.image ? <p className='hover:underline' onClick={handleLogout}>Logout ({userData.firstName}) </p> : <Link to={"login"} className='text-center whitespace-nowrap hover:underline text-base'>Login</Link>}
     <nav className='text-base md:text-lg flex flex-col md:hidden min-w-[60px]'>
       <Link to={""} className='text-center hover:underline'>Home</Link>
-      <Link to={"menu/:filterby"} className='text-center hover:underline'>Menu</Link>
+      <Link to={"menu"} className='text-center hover:underline'>Menu</Link>
       <Link to={"about"} className='text-center hover:underline'>About</Link>
       <Link to={"contact"} className='text-center hover:underline'>Contact</Link>
     </nav>
