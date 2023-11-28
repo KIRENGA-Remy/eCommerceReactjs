@@ -34,40 +34,50 @@ const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-  const {email, password} = data; 
-
-    const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/login`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data)
-    });
-      
+  
+    const { email, password } = data;
+    if (email === "" || password === "") {
+      alert("Email and password are required");
+      return;
+    }
+  
+    try {
+      const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/login`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
       const dataRes = await fetchData.json();
-      // console.log(dataRes);
-      toast(dataRes.message)
-
+      toast(dataRes.message);
+  
       if (!fetchData.ok) {
-        console.error("Failed to login the user user:", fetchData.statusText);
+        console.error("Failed to log in:", fetchData.statusText);
         return;
       }
-      if( email === "" && password === ""){
-        alert(dataRes.message)
-      }
-      if(!dataRes.alert){
+  
+      if (!dataRes.alert) {
         toast(dataRes.message);
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate('/signup');
-        }, 2000)
+        }, 2000);
       } else {
-        dispatch(loginRedux(dataRes))
+        dispatch(loginRedux(dataRes));
         setTimeout(() => {
           navigate("/");
-        }, 2000)
+        }, 2000);
+        setData({
+          email: "",
+          password: "",
+        });
       }
-};
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast("Error during login. Please try again later.");
+    }
+  };
   return (
     <div className='w-full max-w-sm bg-white m-auto rounded-md p-4 flex-col'>
       <h2 className='flex items-center justify-center font-bold mb-2'>Login</h2>
