@@ -25,11 +25,8 @@ const Cart = () => {
   );
 
   const handlePayment = async () => {
-    
-    console.log('called ')
 
     if (user.email) {
-      console.log("user.email exists")
       const stripe = await stripePromise;
 
       const items = productCartItem.map((item) => {
@@ -41,27 +38,15 @@ const Cart = () => {
         }
       }
     );
-      
-      console.log("items",items);
-
       try {
 
-        console.log("backend url ",process.env.REACT_APP_SERVER_DOMIN)
-
-        const fetchData = await fetch(`http://localhost:8080/checkout-payment`, {
+        const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/checkout-payment`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify({ items }),
         });
-
-        console.log("data from backend",fetchData);
-
-        // if (!fetchData.ok) {
-        //   console.error("Error in fetching data:", fetchData.statusText);
-        //   return;
-        // }
 
         const data = await fetchData.json();
 
