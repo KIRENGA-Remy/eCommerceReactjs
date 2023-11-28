@@ -60,7 +60,9 @@ const Cart = () => {
       }
     }
     toast("You're required to login first");
-    navigate('/login')
+    setTimeout(()=>{
+      navigate('/login')
+    }, 1000)
   };
 
   return (
