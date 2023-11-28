@@ -56,14 +56,16 @@ const dispatch = useDispatch();
         console.error("Failed to login the user user:", fetchData.statusText);
         return;
       }
-      if(dataRes.alert){
+      if(!dataRes.alert){
+        toast("The user doesn't exist. Please sign up");
+        setTimeout(()=>{
+          navigate("/signup");
+        }, 2000)
+      } else {
         dispatch(loginRedux(dataRes))
         setTimeout(() => {
           navigate("/");
-        }, 1000)
-      } else {
-        toast("The user doesn't exist. Please sign up");
-        navigate("/signup");
+        }, 2000)
       }
   }
 };
