@@ -59,7 +59,7 @@ const dispatch = useDispatch();
       if(!dataRes.alert){
         toast(dataRes.message);
         setTimeout(()=>{
-          navigate("/signup");
+          navigate('/signup');
         }, 2000)
       } else {
         dispatch(loginRedux(dataRes))
