@@ -61,6 +61,9 @@ const dispatch = useDispatch();
         setTimeout(() => {
           navigate("/");
         }, 1000)
+      } else {
+        toast("The user doesn't exist. Please sign up");
+        navigate("/signup");
       }
   }
 };
