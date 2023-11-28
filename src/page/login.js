@@ -35,10 +35,7 @@ const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  const {email, password} = data;
-  if( email === "" && password === ""){
-    alert("All fields are required")
-  } else {
+  const {email, password} = data; 
 
     const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/login`, {
       method: "POST",
@@ -56,6 +53,9 @@ const dispatch = useDispatch();
         console.error("Failed to login the user user:", fetchData.statusText);
         return;
       }
+      if( email === "" && password === ""){
+        alert("All fields are required")
+      }
       if(!dataRes.alert){
         toast(dataRes.message);
         setTimeout(()=>{
@@ -67,7 +67,6 @@ const dispatch = useDispatch();
           navigate("/");
         }, 2000)
       }
-  }
 };
   return (
     <div className='w-full max-w-sm bg-white m-auto rounded-md p-4 flex-col'>
