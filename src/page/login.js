@@ -57,7 +57,7 @@ const dispatch = useDispatch();
         return;
       }
       if(!dataRes.alert){
-        toast("The user doesn't exist. Please sign up");
+        toast(dataRes.message);
         setTimeout(()=>{
           navigate("/signup");
         }, 2000)
