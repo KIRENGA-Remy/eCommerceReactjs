@@ -54,7 +54,7 @@ const dispatch = useDispatch();
         return;
       }
       if( email === "" && password === ""){
-        alert("All fields are required")
+        alert(dataRes.message)
       }
       if(!dataRes.alert){
         toast(dataRes.message);
